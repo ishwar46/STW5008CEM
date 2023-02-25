@@ -90,7 +90,7 @@ public class Question5B {
                 break;
             }
         }
-        System.out.println(count); // print the number of battery replacements
+        System.out.println("Number of Battery Replacements: " + count ); // print the number of battery replacements
     }
 }
 
