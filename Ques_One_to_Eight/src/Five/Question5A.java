@@ -10,74 +10,40 @@ package Five;
 //Input: height={{1,4,10},{2,5,15},{5,8,12},{9,11,1},{11,13,15}}
         //Output: {{1,10},{2,15},{5,12},{8,0},{9,1},{11,15},{13,0}}
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Question5A {
-    public static List<int[]> findSubarrays(int[] arr) {
-        List<int[]> subArr = new ArrayList<>();
-        int n = arr.length;
-        for (int i = 0; i < n; i++) {
-            for (int j = i; j < n; j++) {
-                int len = j - i + 1;
-                int[] subarray = new int[len];
-                for (int k = 0; k < len; k++) {
-                    subarray[k] = arr[i + k];
-                }
-                subArr.add(subarray);
+    public int[][] getKeyCoordinates(int[][] height) {
+        // Store the start and end points of each rectangle in a TreeMap
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        for (int[] rect : height) {
+            map.put(rect[0], Math.max(map.getOrDefault(rect[0], 0), rect[2]));
+            map.put(rect[1], 0);
+        }
+
+        // Keep track of the current height while iterating through the map
+        int currHeight = 0;
+        int[][] res = new int[map.size()][2];
+        int i = 0;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            int x = entry.getKey();
+            int h = entry.getValue();
+            if (h != currHeight) {
+                res[i][0] = x;
+                res[i][1] = currHeight = h;
+                i++;
             }
         }
-        return subArr;
+
+        // Return the key coordinates
+        return Arrays.copyOfRange(res, 0, i);
     }
 
     public static void main(String[] args) {
-        int[][] arr = new int[][]{{1, 4, 10}, {2, 5, 15}, {5, 8, 12}, {9, 11, 1}, {11, 13, 15}};
-        int[] x = new int[arr.length];
-        int[] y = new int[arr.length];
-        int[] h = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            x[i] = arr[i][0];
-            y[i] = arr[i][1];
-            h[i] = arr[i][2];
-        }
-        List<int[]> subarraysX = findSubarrays(x);
-        List<int[]> subarraysY = findSubarrays(y);
-        List<int[]> subarraysH = findSubarrays(h);
-        int lenght = subarraysX.size();
-        int[] productArrayX = new int[lenght];
-        int[] productArrayY = new int[lenght];
-        int[] productArrayH = new int[lenght];
-        int i = 0;
-        for (int[] arrP : subarraysX) {
-            int product = 1;
-            for (int element : arrP) {
-                product *= element;
-            }
-            productArrayX[i] = product;
-            i++;
-        }
-        i = 0;
-        for (int[] arrP : subarraysY) {
-            int product = 1;
-            for (int element : arrP) {
-                product *= element;
-            }
-            productArrayY[i] = product;
-            i++;
-        }
-        i = 0;
-        for (int[] arrP : subarraysH) {
-            int product = 1;
-            for (int element : arrP) {
-                product *= element;
-            }
-            productArrayH[i] = product;
-            i++;
-        }
-        System.out.println(Arrays.toString(productArrayX));
-        System.out.println(Arrays.toString(productArrayY));
-        System.out.println(Arrays.toString(productArrayH));
+        Question5A obj = new Question5A() ;
+        int[][] height = {{1,4,10},{2,5,15},{5,8,12},{9,11,1},{11,13,15}};
+        int[][] res = obj.getKeyCoordinates(height);
+        System.out.println(Arrays.deepToString(res));
     }
 }
 
