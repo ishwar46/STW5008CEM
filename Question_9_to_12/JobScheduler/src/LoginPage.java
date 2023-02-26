@@ -1,9 +1,13 @@
 
 import java.awt.*;
-        import java.awt.event.ActionEvent;
-        import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.*;
 
-        import javax.swing.*;
+import javax.swing.*;
 
 public class LoginPage extends JFrame implements ActionListener {
 
@@ -55,22 +59,40 @@ public class LoginPage extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == btnLogin) {
-            String username = txtUsername.getText();
-            char[] password = txtPassword.getPassword();
-            if (username.equals("admin") && new String(password).equals("1234")) {
-                JOptionPane.showMessageDialog(this, "Login successful");
-                Homepage homePage = new Homepage();
 
-                this.setVisible(false);
-            } else {
-                JOptionPane.showMessageDialog(this, "Login failed. Try again!");
-                txtUsername.setText("");
-                txtPassword.setText("");
-            }
-        } else if (e.getSource() == btnCancel) {
-            System.exit(0);
+        try {
+            // Connect to database
+            String url = "jdbc:mysql://localhost:3306/job_db";
+            String username = "root";
+            String password = "admin";
+            Connection conn = DriverManager.getConnection(url, username, password);
+
+            System.out.println("Connected to database");
+
+            // Close connection
+            conn.close();
+        } catch (SQLException ex) {
+            // Handle any errors
+            ex.printStackTrace();
         }
+
+
+//        if (e.getSource() == btnLogin) {
+//            String username = txtUsername.getText();
+//            char[] password = txtPassword.getPassword();
+//            if (username.equals("admin") && new String(password).equals("1234")) {
+//                JOptionPane.showMessageDialog(this, "Login successful");
+//                Homepage homePage = new Homepage();
+//
+//                this.setVisible(false);
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Login failed. Try again!");
+//                txtUsername.setText("");
+//                txtPassword.setText("");
+//            }
+//        } else if (e.getSource() == btnCancel) {
+//            System.exit(0);
+//        }
     }
 
     public static void main(String[] args) {
