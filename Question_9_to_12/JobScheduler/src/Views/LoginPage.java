@@ -14,7 +14,7 @@ public class LoginPage extends JFrame implements ActionListener {
     private JLabel lblUsername, lblPassword;
     private JTextField txtUsername;
     private JPasswordField txtPassword;
-    private JButton btnLogin, btnCancel;
+    private JButton btnLogin, btnCancel, btnSignUp;
     private JPanel panel;
 
     public LoginPage() {
@@ -61,6 +61,15 @@ public class LoginPage extends JFrame implements ActionListener {
 
         add(panel);
 
+        btnSignUp = new JButton("Sign Up");
+        btnSignUp.setBounds(270, 160, 90, 25);
+        btnSignUp.addActionListener(this);
+        btnSignUp.setFont(new Font("Arial", Font.BOLD, 14));
+        btnSignUp.setForeground(Color.WHITE);
+        btnSignUp.setBackground(new Color(255, 0, 0));
+        panel.add(btnSignUp);
+
+
     }
 
     @Override
@@ -81,6 +90,12 @@ public class LoginPage extends JFrame implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(this, "Username or password is incorrect!", "Error", JOptionPane.ERROR_MESSAGE);
             }
+
+        } else if (event.getSource() == btnSignUp) {
+            SignUpScreen signUpPage = new SignUpScreen();
+            signUpPage.setVisible(true);
+            dispose();
+
         } else if (event.getSource() == btnCancel) {
             System.exit(0);
         }
