@@ -12,10 +12,11 @@ public class Dashboard extends JFrame implements ActionListener {
     private JButton addTaskButton;
     private JButton createJobButton;
     private JButton scheduleButton;
-    private JButton addtasktojob;
+    private JButton addTaskToJobButton;
     UserController userController;
     User user;
     private JLabel welcome;
+
     public Dashboard() {
         this.userController=new UserController();
         this.user=userController.fetchLoggedInCustomer();
@@ -31,35 +32,45 @@ public class Dashboard extends JFrame implements ActionListener {
         constraints.gridwidth = 4;
         add(welcome, constraints);
 
-        addTaskButton = new JButton("Add Task");
+        addTaskButton = new JButton("Add New Task");
         addTaskButton.addActionListener(this);
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.gridwidth = 1;
         add(addTaskButton, constraints);
 
-        createJobButton = new JButton("Create Job");
+        createJobButton = new JButton("Create New Job");
         createJobButton.addActionListener(this);
         constraints.gridx = 1;
         constraints.gridy = 1;
         add(createJobButton, constraints);
 
-        addtasktojob = new JButton("Add task to job");
-        addtasktojob.addActionListener(this);
+        addTaskToJobButton = new JButton("Add Task to Job");
+        addTaskToJobButton.addActionListener(this);
         constraints.gridx = 2;
         constraints.gridy = 1;
-        add(addtasktojob, constraints);
+        add(addTaskToJobButton, constraints);
 
-        scheduleButton = new JButton("Schedule");
+        scheduleButton = new JButton("Schedule Job");
         scheduleButton.addActionListener(this);
         constraints.gridx = 3;
         constraints.gridy = 1;
         add(scheduleButton, constraints);
 
         setTitle("Dashboard");
-        setSize(500, 150);
+        setSize(600, 150);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        // set UI color scheme
+        getContentPane().setBackground(new Color(44, 62, 80));
+        welcome.setForeground(new Color(236, 240, 241));
+        addTaskButton.setBackground(new Color(52, 152, 219));
+        createJobButton.setBackground(new Color(46, 204, 113));
+        addTaskToJobButton.setBackground(new Color(231, 76, 60));
+        scheduleButton.setBackground(new Color(155, 89, 182));
+
+        setResizable(false);
     }
 
     @Override
@@ -76,7 +87,7 @@ public class Dashboard extends JFrame implements ActionListener {
             createJobScreen.setVisible(true);
             this.dispose();
 
-        }else if (event.getSource() == addtasktojob) {
+        }else if (event.getSource() == addTaskToJobButton) {
             // Create Job logic
             // Add Task logic
             AddTaskPage addTaskScreen = new AddTaskPage();

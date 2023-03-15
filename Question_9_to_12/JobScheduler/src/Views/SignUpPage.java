@@ -11,64 +11,64 @@ import java.awt.event.ActionListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SignUpScreen extends JFrame implements ActionListener {
-    private JLabel usernameLabel;
-    private JLabel passwordLabel;
-    private JLabel emailLabel;
-    private JTextField usernameField;
-    private JPasswordField passwordField;
-    private JTextField emailField;
-    private JButton signupButton;
-    private JButton backButton;
+public class SignUpPage extends JFrame implements ActionListener {
+    private JLabel lblUsername;
+    private JLabel lblPassword;
+    private JLabel lblEmail;
+    private JTextField txtUserName;
+    private JPasswordField txtPassword;
+    private JTextField txtEmail;
+    private JButton btnSignUp;
+    private JButton btnBack;
 
-    public SignUpScreen() {
+    public SignUpPage() {
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(10, 10, 10, 10);
 
-        usernameLabel = new JLabel("Username:");
+        lblUsername = new JLabel("Username:");
         constraints.gridx = 0;
         constraints.gridy = 0;
-        add(usernameLabel, constraints);
+        add(lblUsername, constraints);
 
-        usernameField = new JTextField(20);
+        txtUserName = new JTextField(20);
         constraints.gridx = 1;
         constraints.gridy = 0;
-        add(usernameField, constraints);
+        add(txtUserName, constraints);
 
-        passwordLabel = new JLabel("Password:");
+        lblPassword = new JLabel("Password:");
         constraints.gridx = 0;
         constraints.gridy = 1;
-        add(passwordLabel, constraints);
+        add(lblPassword, constraints);
 
-        passwordField = new JPasswordField(20);
+        txtPassword = new JPasswordField(20);
         constraints.gridx = 1;
         constraints.gridy = 1;
-        add(passwordField, constraints);
+        add(txtPassword, constraints);
 
-        emailLabel = new JLabel("Email:");
+        lblEmail = new JLabel("Email:");
         constraints.gridx = 0;
         constraints.gridy = 2;
-        add(emailLabel, constraints);
+        add(lblEmail, constraints);
 
-        emailField = new JTextField(20);
+        txtEmail = new JTextField(20);
         constraints.gridx = 1;
         constraints.gridy = 2;
-        add(emailField, constraints);
+        add(txtEmail, constraints);
 
-        signupButton = new JButton("Sign Up");
-        signupButton.addActionListener(this);
+        btnSignUp = new JButton("Sign Up");
+        btnSignUp.addActionListener(this);
         constraints.gridx = 1;
         constraints.gridy = 3;
-        add(signupButton, constraints);
+        add(btnSignUp, constraints);
 
-        backButton = new JButton("Go Back");
-        backButton.addActionListener(this);
+        btnBack = new JButton("Go Back");
+        btnBack.addActionListener(this);
         constraints.gridx = 0;
         constraints.gridy = 3;
-        add(backButton, constraints);
+        add(btnBack, constraints);
 
-        setTitle("SignUp Screen");
+        setTitle("SignUp Page");
         setSize(400, 250);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -76,10 +76,10 @@ public class SignUpScreen extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (event.getSource() == signupButton) {
-            String username = usernameField.getText();
-            String password = new String(passwordField.getPassword());
-            String email = emailField.getText();
+        if (event.getSource() == btnSignUp) {
+            String username = txtUserName.getText();
+            String password = new String(txtPassword.getPassword());
+            String email = txtEmail.getText();
 
             if (!validateUsername(username)) {
                 JOptionPane.showMessageDialog(this, "Invalid username. Please enter a valid username.");
@@ -97,7 +97,7 @@ public class SignUpScreen extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(this, "Sign up failed. Please try again later.");
                 }
             }
-        } else if (event.getSource() == backButton) {
+        } else if (event.getSource() == btnBack) {
             LoginPage loginScreen = new LoginPage();
             loginScreen.setVisible(true);
             dispose();

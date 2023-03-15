@@ -80,10 +80,12 @@ public class ScheduleJobPage extends JFrame implements ActionListener {
         constraints.gridy = 2;
         add(backButton, constraints);
 
-        setTitle("Schedule Job Screen");
+        setTitle("Schedule Job");
         setSize(400, 250);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        setResizable(false);
     }
 
     @Override

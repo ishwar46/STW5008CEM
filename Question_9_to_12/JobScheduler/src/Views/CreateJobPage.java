@@ -41,10 +41,11 @@ public class CreateJobPage extends JFrame implements ActionListener {
         constraints.gridy = 1;
         add(backButton, constraints);
 
-        setTitle("Create Job Screen");
+        setTitle("Create Job");
         setSize(400, 250);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     @Override

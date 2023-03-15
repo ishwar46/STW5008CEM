@@ -33,6 +33,8 @@ public class AddTaskPage extends JFrame implements ActionListener {
         constraints.gridy = 0;
         add(jobIdLabel, constraints);
 
+        setResizable(false);
+
         jobIdComboBox = new JComboBox();
         jobIdComboBox.addItem("Select Job ID");
         // Add job IDs to the combo box
@@ -121,7 +123,7 @@ public class AddTaskPage extends JFrame implements ActionListener {
         constraints.gridy = 3;
         add(backButton, constraints);
 
-        setTitle("Add Task Screen");
+        setTitle("Add Task");
         setSize(400, 250);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
